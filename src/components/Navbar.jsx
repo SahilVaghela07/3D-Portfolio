@@ -1,0 +1,104 @@
+import { useState, useEffect } from 'react'
+import { Link } from 'react-scroll'
+import { motion, AnimatePresence } from 'framer-motion'
+import { HiMenuAlt3, HiX } from 'react-icons/hi'
+import './Navbar.css'
+
+const navLinks = [
+  { id: 'home', title: 'Home' },
+  { id: 'about', title: 'About' },
+  { id: 'projects', title: 'Projects' },
+  { id: 'skills', title: 'Skills' },
+  { id: 'contact', title: 'Contact' },
+]
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  return (
+    <motion.nav
+      className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="navbar__container">
+        <Link to="home" smooth duration={500} className="navbar__logo">
+          <span className="navbar__logo-bracket">&lt;</span>
+          <span className="navbar__logo-text">SV</span>
+          <span className="navbar__logo-bracket">/&gt;</span>
+        </Link>
+
+        {/* Desktop Links */}
+        <ul className="navbar__links">
+          {navLinks.map((link, index) => (
+            <motion.li
+              key={link.id}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <Link
+                to={link.id}
+                smooth
+                duration={500}
+                spy
+                offset={-80}
+                activeClass="active"
+                className="navbar__link"
+              >
+                {link.title}
+              </Link>
+            </motion.li>
+          ))}
+        </ul>
+
+        {/* Mobile Menu Toggle */}
+        <button
+          className="navbar__mobile-toggle"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
+        </button>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              className="navbar__mobile-menu"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 0.3 }}
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.id}
+                  to={link.id}
+                  smooth
+                  duration={500}
+                  spy
+                  offset={-80}
+                  className="navbar__mobile-link"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {link.title}
+                </Link>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.nav>
+  )
+}
