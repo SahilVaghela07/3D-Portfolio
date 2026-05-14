@@ -1,12 +1,27 @@
 import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 import { FiMail, FiMapPin, FiSend, FiGithub, FiLinkedin, FiArrowUpRight } from 'react-icons/fi'
 import './Contact.css'
+
+// ============================================================
+// 🔑 EMAILJS SETUP — Replace these 3 values with your own!
+//
+// 1. Go to https://www.emailjs.com/ and sign up (free)
+// 2. Add a Gmail service → copy the SERVICE ID
+// 3. Create an email template → copy the TEMPLATE ID
+//    Template variables: {{from_name}}, {{from_email}}, {{message}}, {{to_name}}
+// 4. Go to Account → API Keys → copy the PUBLIC KEY
+// ============================================================
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID'   // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID' // e.g. 'template_xyz789'
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'    // e.g. 'AbCdEfGhIjKlMn'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState(false)
   const formRef = useRef()
 
   const handleChange = (e) => {
@@ -16,14 +31,31 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault()
     setSending(true)
+    setError(false)
 
-    // Simulate sending (replace with EmailJS or backend later)
-    setTimeout(() => {
+    emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        from_name: form.name,
+        from_email: form.email,
+        to_name: 'Sahil Vaghela',
+        message: form.message,
+      },
+      EMAILJS_PUBLIC_KEY
+    )
+    .then(() => {
       setSending(false)
       setSent(true)
       setForm({ name: '', email: '', message: '' })
       setTimeout(() => setSent(false), 4000)
-    }, 1500)
+    })
+    .catch((err) => {
+      setSending(false)
+      setError(true)
+      console.error('EmailJS Error:', err)
+      setTimeout(() => setError(false), 4000)
+    })
   }
 
   return (
@@ -166,6 +198,8 @@ export default function Contact() {
                 <span>Sending...</span>
               ) : sent ? (
                 <span>✓ Message Sent!</span>
+              ) : error ? (
+                <span>✗ Failed to send. Try again.</span>
               ) : (
                 <>
                   <FiSend />
