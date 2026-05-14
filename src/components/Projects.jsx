@@ -6,10 +6,10 @@ const projects = [
   {
     title: 'Traveloop',
     description:
-      'A travel exploration platform designed to help users discover, plan, and share their travel experiences. Features an intuitive UI for browsing destinations, trip planning tools, and a community-driven approach to travel.',
-    tags: ['HTML', 'CSS', 'JavaScript'],
+      'A multi-city travel planning web app for building itineraries, estimating trip budgets, and sharing travel plans. Features city discovery, activity search, budget tracking, and public itinerary sharing.',
+    tags: ['React', 'Node.js', 'MySQL', 'Tailwind CSS', 'Express'],
     icon: <FiMapPin />,
-    github: 'https://github.com/SahilVaghela07/Traveloop',
+    github: 'https://github.com/Jayesh-2007/Traveloop',
     comingSoon: false,
   },
   {
