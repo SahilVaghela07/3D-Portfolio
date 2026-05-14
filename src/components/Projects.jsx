@@ -1,21 +1,22 @@
 import { motion } from 'framer-motion'
-import { FiGithub, FiExternalLink, FiClock } from 'react-icons/fi'
+import { FiGithub, FiExternalLink, FiClock, FiMapPin } from 'react-icons/fi'
 import './Projects.css'
 
 const projects = [
   {
-    title: 'Coming Soon',
+    title: 'Traveloop',
     description:
-      'Exciting projects are currently in development. Stay tuned for innovative web applications, creative experiments, and impactful solutions that showcase my skills and passion for development.',
-    tags: ['React', 'Node.js', 'Three.js', 'MongoDB'],
-    icon: <FiClock />,
-    comingSoon: true,
+      'A travel exploration platform designed to help users discover, plan, and share their travel experiences. Features an intuitive UI for browsing destinations, trip planning tools, and a community-driven approach to travel.',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    icon: <FiMapPin />,
+    github: 'https://github.com/SahilVaghela07/Traveloop',
+    comingSoon: false,
   },
   {
     title: 'Coming Soon',
     description:
       'More amazing projects are on the way! I\'m constantly learning and building new things. Check back soon to see my latest work and contributions to the developer community.',
-    tags: ['Python', 'JavaScript', 'CSS', 'API'],
+    tags: ['React', 'Node.js', 'MongoDB', 'API'],
     icon: <FiClock />,
     comingSoon: true,
   },
@@ -23,7 +24,7 @@ const projects = [
     title: 'Coming Soon',
     description:
       'I\'m working on something special. As a developer who loves creating, I\'m always exploring new technologies and pushing my boundaries. Watch this space for updates!',
-    tags: ['Next.js', 'TypeScript', 'Tailwind', 'Firebase'],
+    tags: ['Next.js', 'TypeScript', 'Three.js', 'Firebase'],
     icon: <FiClock />,
     comingSoon: true,
   },
@@ -81,8 +82,12 @@ export default function Projects() {
                 <div className="projects__card-links">
                   {!project.comingSoon && (
                     <>
-                      <a href="#" aria-label="GitHub"><FiGithub /></a>
-                      <a href="#" aria-label="Live Demo"><FiExternalLink /></a>
+                      {project.github && (
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FiGithub /></a>
+                      )}
+                      {project.live && (
+                        <a href={project.live} target="_blank" rel="noopener noreferrer" aria-label="Live Demo"><FiExternalLink /></a>
+                      )}
                     </>
                   )}
                 </div>
