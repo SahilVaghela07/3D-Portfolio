@@ -9,7 +9,7 @@ const projects = [
       'A multi-city travel planning web app for building itineraries, estimating trip budgets, and sharing travel plans. Features city discovery, activity search, budget tracking, and public itinerary sharing.',
     tags: ['React', 'Node.js', 'MySQL', 'Tailwind CSS', 'Express'],
     icon: <FiMapPin />,
-    github: 'https://github.com/Jayesh-2007/Traveloop',
+    github: 'https://github.com/SahilVaghela07/Traveloop',
     comingSoon: false,
   },
   {
