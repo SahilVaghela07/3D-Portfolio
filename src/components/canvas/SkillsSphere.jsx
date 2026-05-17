@@ -11,19 +11,40 @@ const skills = [
 ]
 
 function SkillNode({ text, position, color }) {
+  const groupRef = useRef()
+
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime()
+    if (groupRef.current) {
+      groupRef.current.position.y = position[1] + Math.sin(t * 0.8 + position[0]) * 0.08
+    }
+  })
+
   return (
-    <Float speed={1.5} rotationIntensity={0} floatIntensity={0.5}>
-      <group position={position}>
+    <Float speed={1.2} rotationIntensity={0} floatIntensity={0.3}>
+      <group ref={groupRef} position={position}>
+        {/* Glowing node sphere */}
         <mesh>
           <sphereGeometry args={[0.12, 16, 16]} />
           <meshStandardMaterial
             color={color}
             emissive={color}
-            emissiveIntensity={0.5}
+            emissiveIntensity={1.5}
+            toneMapped={false}
+          />
+        </mesh>
+        {/* Outer glow ring */}
+        <mesh>
+          <sphereGeometry args={[0.18, 16, 16]} />
+          <meshStandardMaterial
+            color={color}
+            transparent
+            opacity={0.15}
+            toneMapped={false}
           />
         </mesh>
         <Text
-          position={[0.25, 0, 0]}
+          position={[0.3, 0, 0]}
           fontSize={0.2}
           color={color}
           anchorX="left"
@@ -34,6 +55,42 @@ function SkillNode({ text, position, color }) {
         </Text>
       </group>
     </Float>
+  )
+}
+
+/* ─── Connecting Lines (Constellation) ─── */
+function ConstellationLines({ positions }) {
+  const lineGeometry = useMemo(() => {
+    const points = []
+    // Connect nearby skills
+    for (let i = 0; i < positions.length; i++) {
+      for (let j = i + 1; j < positions.length; j++) {
+        const dist = Math.sqrt(
+          Math.pow(positions[i][0] - positions[j][0], 2) +
+          Math.pow(positions[i][1] - positions[j][1], 2) +
+          Math.pow(positions[i][2] - positions[j][2], 2)
+        )
+        if (dist < 3.5) {
+          points.push(
+            new THREE.Vector3(...positions[i]),
+            new THREE.Vector3(...positions[j])
+          )
+        }
+      }
+    }
+    const geometry = new THREE.BufferGeometry().setFromPoints(points)
+    return geometry
+  }, [positions])
+
+  return (
+    <lineSegments geometry={lineGeometry}>
+      <lineBasicMaterial
+        color="#00d992"
+        transparent
+        opacity={0.08}
+        depthWrite={false}
+      />
+    </lineSegments>
   )
 }
 
@@ -59,17 +116,18 @@ export default function SkillsSphere() {
     return pos
   }, [])
 
-  const colors = ['#00d992', '#2fd6a1', '#10b981', '#bdbdbd', '#8b949e']
+  const colors = ['#00d992', '#2fd6a1', '#6366f1', '#818cf8', '#10b981']
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime()
     if (groupRef.current) {
-      groupRef.current.rotation.y = time * 0.1
+      groupRef.current.rotation.y = time * 0.08
     }
   })
 
   return (
     <group ref={groupRef}>
+      <ConstellationLines positions={positions} />
       {skills.map((skill, i) => (
         <SkillNode
           key={skill}
@@ -78,14 +136,16 @@ export default function SkillsSphere() {
           color={colors[i % colors.length]}
         />
       ))}
+      {/* Core orb */}
       <mesh>
-        <sphereGeometry args={[0.3, 32, 32]} />
+        <sphereGeometry args={[0.25, 32, 32]} />
         <meshStandardMaterial
           color="#00d992"
           emissive="#00d992"
-          emissiveIntensity={0.65}
+          emissiveIntensity={1.5}
           transparent
-          opacity={0.22}
+          opacity={0.2}
+          toneMapped={false}
         />
       </mesh>
     </group>
