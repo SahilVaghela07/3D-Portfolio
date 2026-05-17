@@ -3,9 +3,17 @@
   inset: 0;
   z-index: 9999;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.loader__scene {
+  width: 220px;
+  height: 220px;
+  margin-bottom: 24px;
 }
 
 .loader__content {
@@ -20,24 +28,42 @@
   align-items: center;
   gap: 8px;
   min-height: 46px;
-  padding: 12px 16px;
+  padding: 12px 20px;
   color: var(--text-primary);
   background: var(--bg-tertiary);
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-md);
   font-family: var(--font-mono);
   font-size: 0.9rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 217, 146, 0.05);
 }
 
 .loader__prompt {
   color: var(--accent-primary);
+  text-shadow: 0 0 10px var(--accent-glow);
 }
 
 .loader__caret {
   width: 8px;
-  height: 16px;
+  height: 18px;
   background: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-glow);
   animation: terminal-caret 1s steps(1) infinite;
+}
+
+.loader__progress {
+  width: 200px;
+  height: 3px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.loader__progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary, #6366f1));
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .loader__text {
@@ -45,4 +71,5 @@
   font-family: var(--font-mono);
   font-size: 0.78rem;
   text-transform: uppercase;
+  letter-spacing: 0.15em;
 }
