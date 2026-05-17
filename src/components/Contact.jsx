@@ -5,50 +5,49 @@ import { FiMail, FiMapPin, FiSend, FiGithub, FiLinkedin, FiArrowUpRight, FiClock
 import TiltCard from './TiltCard'
 import './Contact.css'
 
-// Replace these EmailJS placeholders with real credentials when the form is ready for production.
-const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID'   // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID' // e.g. 'template_xyz789'
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'    // e.g. 'AbCdEfGhIjKlMn'
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [sending, setSending] = useState(false)
-  const [sent, setSent] = useState(false)
-  const [error, setError] = useState(false)
+  const [form, setForm] = useState({ from_name: '', from_email: '', message: '' })
+  const [status, setStatus] = useState('idle')
   const formRef = useRef()
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSending(true)
-    setError(false)
 
-    emailjs.send(
-      EMAILJS_SERVICE_ID,
-      EMAILJS_TEMPLATE_ID,
-      {
-        from_name: form.name,
-        from_email: form.email,
-        to_name: 'Sahil Vaghela',
-        message: form.message,
-      },
-      EMAILJS_PUBLIC_KEY
-    )
-    .then(() => {
-      setSending(false)
-      setSent(true)
-      setForm({ name: '', email: '', message: '' })
-      setTimeout(() => setSent(false), 4000)
-    })
-    .catch((err) => {
-      setSending(false)
-      setError(true)
-      console.error('EmailJS Error:', err)
-      setTimeout(() => setError(false), 4000)
-    })
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      console.error('EmailJS error: missing VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, or VITE_EMAILJS_PUBLIC_KEY.')
+      setStatus('error')
+      return
+    }
+
+    setStatus('sending')
+
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      )
+
+      setForm({ from_name: '', from_email: '', message: '' })
+      formRef.current.reset()
+      setStatus('sent')
+
+      setTimeout(() => {
+        setStatus('idle')
+      }, 3000)
+    } catch (err) {
+      console.error('EmailJS error:', err)
+      setStatus('error')
+    }
   }
 
   return (
@@ -169,6 +168,7 @@ export default function Contact() {
             <TiltCard className="contact__form-tilt" intensity={5} disabled>
               <form
                 ref={formRef}
+                id="contact-form"
                 className="contact__form glass-card"
                 onSubmit={handleSubmit}
               >
@@ -182,9 +182,9 @@ export default function Contact() {
                   <input
                     id="contact-name"
                     type="text"
-                    name="name"
+                    name="from_name"
                     placeholder="John Doe"
-                    value={form.name}
+                    value={form.from_name}
                     onChange={handleChange}
                     required
                   />
@@ -195,9 +195,9 @@ export default function Contact() {
                   <input
                     id="contact-email"
                     type="email"
-                    name="email"
+                    name="from_email"
                     placeholder="john@example.com"
-                    value={form.email}
+                    value={form.from_email}
                     onChange={handleChange}
                     required
                   />
@@ -218,18 +218,18 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className={`btn-primary contact__submit ${sent ? 'contact__submit--sent' : ''} ${error ? 'contact__submit--error' : ''}`}
-                  id="contact-submit-btn"
-                  disabled={sending}
+                  className={`btn-primary contact__submit ${status === 'sent' ? 'contact__submit--sent' : ''} ${status === 'error' ? 'contact__submit--error' : ''}`}
+                  id="submit-btn"
+                  disabled={status === 'sending' || status === 'sent'}
                 >
-                  {sending ? (
+                  {status === 'sending' ? (
                     <span className="contact__sending">
                       <span className="contact__spinner" />
                       Sending...
                     </span>
-                  ) : sent ? (
-                    <span><FiCheck /> Message Sent!</span>
-                  ) : error ? (
+                  ) : status === 'sent' ? (
+                    <span><FiCheck /> Message Sent</span>
+                  ) : status === 'error' ? (
                     <span><FiX /> Failed — Try Again</span>
                   ) : (
                     <>
