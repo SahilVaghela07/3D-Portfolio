@@ -130,10 +130,10 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
         >
-          <Link to="projects" smooth duration={500} offset={-80}>
+          <Link to="about" smooth duration={500} offset={-80}>
             <button className="btn-primary" id="hero-explore-btn">
               <FiArrowUpRight />
-              <span>Explore My Work</span>
+              <span>Enter Gallery</span>
             </button>
           </Link>
           <Link to="contact" smooth duration={500} offset={-80}>

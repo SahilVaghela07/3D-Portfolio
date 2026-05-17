@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
-import BackgroundScene from './components/canvas/BackgroundScene'
+import { initGalleryBackground } from './gallery-bg'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -18,6 +18,14 @@ function App() {
     const timer = setTimeout(() => setLoading(false), 2200)
     return () => clearTimeout(timer)
   }, [])
+
+  useEffect(() => {
+    if (loading) {
+      return undefined
+    }
+
+    return initGalleryBackground()
+  }, [loading])
 
   // Track mouse position for glass card glow effects
   useEffect(() => {
@@ -44,7 +52,6 @@ function App() {
 
       {!loading && (
         <div className="app">
-          <BackgroundScene />
           <Navbar />
           <Hero />
           <About />
