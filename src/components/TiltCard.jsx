@@ -1,12 +1,12 @@
 import { useRef, useState, useCallback } from 'react'
 
-export default function TiltCard({ children, className = '', intensity = 12, glowColor = 'rgba(0, 217, 146, 0.15)' }) {
+export default function TiltCard({ children, className = '', intensity = 12, glowColor = 'rgba(0, 217, 146, 0.15)', disabled = false }) {
   const cardRef = useRef(null)
   const [style, setStyle] = useState({})
   const rafRef = useRef(null)
 
   const handleMouseMove = useCallback((e) => {
-    if (!cardRef.current) return
+    if (disabled || !cardRef.current) return
 
     if (rafRef.current) cancelAnimationFrame(rafRef.current)
 
@@ -37,9 +37,11 @@ export default function TiltCard({ children, className = '', intensity = 12, glo
         '--mouse-y': `${shineY}%`,
       })
     })
-  }, [intensity])
+  }, [disabled, intensity])
 
   const handleMouseLeave = useCallback(() => {
+    if (disabled) return
+
     if (rafRef.current) cancelAnimationFrame(rafRef.current)
     setStyle({
       transform: 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
@@ -50,15 +52,15 @@ export default function TiltCard({ children, className = '', intensity = 12, glo
       '--mouse-x': '50%',
       '--mouse-y': '50%',
     })
-  }, [])
+  }, [disabled])
 
   return (
     <div
       ref={cardRef}
       className={`tilt-card ${className}`}
-      style={style}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      style={disabled ? undefined : style}
+      onMouseMove={disabled ? undefined : handleMouseMove}
+      onMouseLeave={disabled ? undefined : handleMouseLeave}
     >
       <div className="tilt-card__shine" />
       <div className="tilt-card__edge-glow" />

@@ -166,7 +166,7 @@ export default function Contact() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8 }}
           >
-            <TiltCard className="contact__form-tilt" intensity={5}>
+            <TiltCard className="contact__form-tilt" intensity={5} disabled>
               <form
                 ref={formRef}
                 className="contact__form glass-card"
