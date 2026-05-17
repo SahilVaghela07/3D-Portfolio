@@ -35,7 +35,7 @@ const processSteps = [
   {
     step: '04',
     title: 'Reflect',
-    description: 'Review what worked, what didn't, and document learnings for next time.',
+    description: "Review what worked, what didn't, and document learnings for next time.",
     icon: <FiTrendingUp />,
     color: '#00d992',
   },
