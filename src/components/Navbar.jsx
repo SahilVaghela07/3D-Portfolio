@@ -10,6 +10,7 @@ const navLinks = [
   { id: 'about', title: 'About' },
   { id: 'projects', title: 'Projects' },
   { id: 'skills', title: 'Skills' },
+  { id: 'learning', title: 'Learning' },
   { id: 'contact', title: 'Contact' },
 ]
 
@@ -44,7 +45,7 @@ export default function Navbar() {
               key={link.id}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.08 }}
             >
               <Link
                 to={link.id}
@@ -82,37 +83,54 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <AnimatePresence>
           {mobileOpen && (
-            <motion.div
-              className="navbar__mobile-menu"
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 100 }}
-              transition={{ duration: 0.3 }}
-            >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.id}
-                  to={link.id}
-                  smooth
-                  duration={500}
-                  spy
-                  offset={-80}
-                  className="navbar__mobile-link"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {link.title}
-                </Link>
-              ))}
-              <a
-                href="https://github.com/SahilVaghela07"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="navbar__mobile-cta"
+            <>
+              <motion.div
+                className="navbar__mobile-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setMobileOpen(false)}
+              />
+              <motion.div
+                className="navbar__mobile-menu"
+                initial={{ opacity: 0, x: 100, rotateY: -10 }}
+                animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                exit={{ opacity: 0, x: 100, rotateY: -10 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
-                <FiGithub />
-                <span>GitHub Profile</span>
-              </a>
-            </motion.div>
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.id}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 * index }}
+                  >
+                    <Link
+                      to={link.id}
+                      smooth
+                      duration={500}
+                      spy
+                      offset={-80}
+                      className="navbar__mobile-link"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <span className="navbar__mobile-link-number">{String(index + 1).padStart(2, '0')}</span>
+                      {link.title}
+                    </Link>
+                  </motion.div>
+                ))}
+                <a
+                  href="https://github.com/SahilVaghela07"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="navbar__mobile-cta"
+                >
+                  <FiGithub />
+                  <span>GitHub Profile</span>
+                </a>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>

@@ -6,6 +6,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
+import Learning from './components/Learning'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Loader from './components/Loader'
@@ -14,9 +15,26 @@ function App() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000)
+    const timer = setTimeout(() => setLoading(false), 2200)
     return () => clearTimeout(timer)
   }, [])
+
+  // Track mouse position for glass card glow effects
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const cards = document.querySelectorAll('.glass-card')
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect()
+        const x = ((e.clientX - rect.left) / rect.width) * 100
+        const y = ((e.clientY - rect.top) / rect.height) * 100
+        card.style.setProperty('--mouse-x', `${x}%`)
+        card.style.setProperty('--mouse-y', `${y}%`)
+      })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [loading])
 
   return (
     <>
@@ -32,6 +50,7 @@ function App() {
           <About />
           <Projects />
           <Skills />
+          <Learning />
           <Contact />
           <Footer />
         </div>
