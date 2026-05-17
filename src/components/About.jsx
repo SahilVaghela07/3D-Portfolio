@@ -1,27 +1,32 @@
 import { motion } from 'framer-motion'
-import { FiCode, FiBookOpen, FiCpu, FiHeart } from 'react-icons/fi'
+import { FiCode, FiBookOpen, FiCpu, FiHeart, FiTarget, FiTrendingUp } from 'react-icons/fi'
+import TiltCard from './TiltCard'
 import './About.css'
 
 const highlights = [
   {
     icon: <FiCode />,
     title: 'Frontend Craft',
-    description: 'Building responsive interfaces with React, motion, and practical component structure.',
-  },
-  {
-    icon: <FiBookOpen />,
-    title: 'Engineering Mindset',
-    description: 'Studying at GCET while turning classroom concepts into working software.',
+    description: 'Building responsive interfaces with React, motion, and thoughtful component architecture.',
+    color: '#00d992',
   },
   {
     icon: <FiCpu />,
-    title: 'Problem Solving',
-    description: 'Breaking down product ideas into simple flows, data models, and user actions.',
+    title: 'Full-Stack Thinking',
+    description: 'Connecting frontend to backend — Node.js, databases, APIs, and deployment pipelines.',
+    color: '#6366f1',
   },
   {
-    icon: <FiHeart />,
-    title: 'Community',
-    description: 'Sharing what I learn with peers and staying curious through collaboration.',
+    icon: <FiTarget />,
+    title: 'Problem Solver',
+    description: 'Breaking complex problems into simple flows, data models, and clear user actions.',
+    color: '#f59e0b',
+  },
+  {
+    icon: <FiTrendingUp />,
+    title: 'Always Growing',
+    description: 'Shipping projects, learning from feedback, and pushing beyond my comfort zone every week.',
+    color: '#00d992',
   },
 ]
 
@@ -30,17 +35,18 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.12,
     },
   },
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 50, rotateX: 15 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    rotateX: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
@@ -61,30 +67,51 @@ export default function About() {
         </motion.div>
 
         <div className="about__content">
+          {/* Story — 3-part narrative */}
           <motion.div
-            className="about__text"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -40, rotateY: -5 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="about__intro">
-              I am <span className="about__highlight">Sahil Vaghela</span>, 
-              an engineering student at <span className="about__highlight">G.H. Patel
-              College of Engineering & Technology (GCET)</span>.
-            </p>
-            <p>
-              I like building web experiences that feel direct, fast, and useful.
-              My current focus is React, backend fundamentals, databases, and the
-              small product decisions that make software easier to understand.
-            </p>
-            <p>
-              I am always learning by making things, from travel-planning tools to
-              interactive portfolio experiments. The goal is simple: keep improving,
-              keep shipping, and keep helping other students along the way.
-            </p>
+            <TiltCard className="about__story-card" intensity={6}>
+              <div className="about__text">
+                {/* What I do */}
+                <div className="about__story-section">
+                  <span className="about__story-label">What I Do</span>
+                  <p className="about__intro">
+                    I'm <span className="about__highlight">Sahil Vaghela</span>, a
+                    developer and engineering student at{' '}
+                    <span className="about__highlight">GCET</span> who builds web
+                    experiences that feel fast, clean, and genuinely useful.
+                  </p>
+                </div>
+
+                {/* Why */}
+                <div className="about__story-section">
+                  <span className="about__story-label">Why I Build</span>
+                  <p>
+                    I realized early that the best way to learn isn't reading docs — it's
+                    shipping real things. Every broken build and stubborn bug taught me
+                    more than any textbook. That hunger to solve problems drives everything
+                    I create.
+                  </p>
+                </div>
+
+                {/* Where headed */}
+                <div className="about__story-section">
+                  <span className="about__story-label">Where I'm Headed</span>
+                  <p>
+                    I'm working toward becoming a full-stack engineer who can own a product
+                    end-to-end — from database design to pixel-perfect UI. Always learning,
+                    always shipping, always helping other students along the way.
+                  </p>
+                </div>
+              </div>
+            </TiltCard>
           </motion.div>
 
+          {/* Highlight Cards Grid */}
           <motion.div
             className="about__highlights"
             variants={containerVariants}
@@ -93,15 +120,26 @@ export default function About() {
             viewport={{ once: true, margin: '-100px' }}
           >
             {highlights.map((item, index) => (
-              <motion.div
-                key={index}
-                className="about__highlight-card glass-card"
-                variants={itemVariants}
-                whileHover={{ scale: 1.03 }}
-              >
-                <div className="about__highlight-icon">{item.icon}</div>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
+              <motion.div key={index} variants={itemVariants}>
+                <TiltCard className="about__highlight-card glass-card" intensity={10}>
+                  <div
+                    className="about__highlight-icon"
+                    style={{
+                      '--icon-color': item.color,
+                      color: item.color,
+                      background: `${item.color}15`,
+                      borderColor: `${item.color}30`,
+                    }}
+                  >
+                    {item.icon}
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <div
+                    className="about__card-glow"
+                    style={{ background: `radial-gradient(circle at 50% 0%, ${item.color}12, transparent 70%)` }}
+                  />
+                </TiltCard>
               </motion.div>
             ))}
           </motion.div>
