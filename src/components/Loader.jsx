@@ -9,13 +9,13 @@ export default function Loader() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="loader__shapes">
-          <div className="loader__shape loader__shape--1" />
-          <div className="loader__shape loader__shape--2" />
-          <div className="loader__shape loader__shape--3" />
+        <div className="loader__terminal">
+          <span className="loader__prompt">$</span>
+          <span>boot portfolio</span>
+          <span className="loader__caret" />
         </div>
         <p className="loader__text">
-          <span className="gradient-text">Loading Experience</span>
+          Loading experience
         </p>
       </motion.div>
     </div>

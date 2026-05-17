@@ -4,15 +4,7 @@ import emailjs from '@emailjs/browser'
 import { FiMail, FiMapPin, FiSend, FiGithub, FiLinkedin, FiArrowUpRight } from 'react-icons/fi'
 import './Contact.css'
 
-// ============================================================
-// 🔑 EMAILJS SETUP — Replace these 3 values with your own!
-//
-// 1. Go to https://www.emailjs.com/ and sign up (free)
-// 2. Add a Gmail service → copy the SERVICE ID
-// 3. Create an email template → copy the TEMPLATE ID
-//    Template variables: {{from_name}}, {{from_email}}, {{message}}, {{to_name}}
-// 4. Go to Account → API Keys → copy the PUBLIC KEY
-// ============================================================
+// Replace these EmailJS placeholders with real credentials when the form is ready for production.
 const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID'   // e.g. 'service_abc123'
 const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID' // e.g. 'template_xyz789'
 const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'    // e.g. 'AbCdEfGhIjKlMn'
@@ -83,12 +75,11 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
           >
             <h3 className="contact__info-title">
-              Let's build something{' '}
-              <span className="gradient-text">amazing</span> together
+              Open to internships, collaborations, and useful web ideas.
             </h3>
             <p className="contact__info-text">
-              I'm always open to discussing new opportunities, interesting projects, 
-              or just having a chat about technology. Feel free to reach out!
+              Send a note if you want to talk about a project, an opportunity, or a
+              technical idea worth building. I usually reply with context and next steps.
             </p>
 
             <div className="contact__details">
@@ -197,9 +188,9 @@ export default function Contact() {
               {sending ? (
                 <span>Sending...</span>
               ) : sent ? (
-                <span>✓ Message Sent!</span>
+                <span>Message sent</span>
               ) : error ? (
-                <span>✗ Failed to send. Try again.</span>
+                <span>Failed to send. Try again.</span>
               ) : (
                 <>
                   <FiSend />

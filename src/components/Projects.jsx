@@ -5,26 +5,35 @@ import './Projects.css'
 const projects = [
   {
     title: 'Traveloop',
+    eyebrow: 'Featured Build',
+    status: 'Live repository',
     description:
       'A multi-city travel planning web app for building itineraries, estimating trip budgets, and sharing travel plans. Features city discovery, activity search, budget tracking, and public itinerary sharing.',
     tags: ['React', 'Node.js', 'MySQL', 'Tailwind CSS', 'Express'],
+    command: 'git clone SahilVaghela07/Traveloop',
     icon: <FiMapPin />,
     github: 'https://github.com/SahilVaghela07/Traveloop',
     comingSoon: false,
   },
   {
     title: 'Coming Soon',
+    eyebrow: 'In Progress',
+    status: 'Planning',
     description:
-      'More amazing projects are on the way! I\'m constantly learning and building new things. Check back soon to see my latest work and contributions to the developer community.',
+      'More projects are on the way as I keep building and learning. This slot is reserved for the next shipped web experience.',
     tags: ['React', 'Node.js', 'MongoDB', 'API'],
+    command: 'npm run build-next-idea',
     icon: <FiClock />,
     comingSoon: true,
   },
   {
     title: 'Coming Soon',
+    eyebrow: 'Experiment',
+    status: 'Prototype',
     description:
-      'I\'m working on something special. As a developer who loves creating, I\'m always exploring new technologies and pushing my boundaries. Watch this space for updates!',
+      'A space for experiments with TypeScript, Three.js, and real-time services while I sharpen my frontend engineering skills.',
     tags: ['Next.js', 'TypeScript', 'Three.js', 'Firebase'],
+    command: 'pnpm create product-lab',
     icon: <FiClock />,
     comingSoon: true,
   },
@@ -77,6 +86,11 @@ export default function Projects() {
               variants={cardVariants}
               whileHover={{ y: -8 }}
             >
+              <div className="projects__meta">
+                <span>{project.eyebrow}</span>
+                <span>{project.status}</span>
+              </div>
+
               <div className="projects__card-header">
                 <div className="projects__card-icon">{project.icon}</div>
                 <div className="projects__card-links">
@@ -95,6 +109,8 @@ export default function Projects() {
 
               <h3 className="projects__card-title">{project.title}</h3>
               <p className="projects__card-description">{project.description}</p>
+
+              <code className="projects__command">{project.command}</code>
 
               <div className="projects__card-tags">
                 {project.tags.map((tag) => (
@@ -119,7 +135,7 @@ export default function Projects() {
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
         >
-          🚀 New projects are being built every day. Stay connected!
+          New builds are being shaped, tested, and shipped as I keep learning.
         </motion.p>
       </div>
     </section>

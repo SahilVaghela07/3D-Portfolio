@@ -59,7 +59,7 @@ export default function SkillsSphere() {
     return pos
   }, [])
 
-  const colors = ['#00f5ff', '#8b5cf6', '#ec4899', '#3b82f6', '#10b981']
+  const colors = ['#00d992', '#2fd6a1', '#10b981', '#bdbdbd', '#8b949e']
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime()
@@ -78,15 +78,14 @@ export default function SkillsSphere() {
           color={colors[i % colors.length]}
         />
       ))}
-      {/* Center glow */}
       <mesh>
         <sphereGeometry args={[0.3, 32, 32]} />
         <meshStandardMaterial
-          color="#8b5cf6"
-          emissive="#8b5cf6"
-          emissiveIntensity={1}
+          color="#00d992"
+          emissive="#00d992"
+          emissiveIntensity={0.65}
           transparent
-          opacity={0.3}
+          opacity={0.22}
         />
       </mesh>
     </group>

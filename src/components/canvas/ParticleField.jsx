@@ -12,10 +12,10 @@ export default function ParticleField({ count = 2000 }) {
     const sizes = new Float32Array(count)
 
     const colorOptions = [
-      new THREE.Color('#00f5ff'),
-      new THREE.Color('#8b5cf6'),
-      new THREE.Color('#ec4899'),
-      new THREE.Color('#3b82f6'),
+      new THREE.Color('#00d992'),
+      new THREE.Color('#2fd6a1'),
+      new THREE.Color('#10b981'),
+      new THREE.Color('#8b949e'),
     ]
 
     for (let i = 0; i < count; i++) {
@@ -28,7 +28,7 @@ export default function ParticleField({ count = 2000 }) {
       colors[i * 3 + 1] = color.g
       colors[i * 3 + 2] = color.b
 
-      sizes[i] = Math.random() * 2 + 0.5
+      sizes[i] = Math.random() * 1.2 + 0.35
     }
 
     return { positions, colors, sizes }
@@ -59,10 +59,10 @@ export default function ParticleField({ count = 2000 }) {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.08}
+        size={0.055}
         vertexColors
         transparent
-        opacity={0.8}
+        opacity={0.36}
         sizeAttenuation
         blending={THREE.AdditiveBlending}
         depthWrite={false}

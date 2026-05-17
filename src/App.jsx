@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import BackgroundScene from './components/canvas/BackgroundScene'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -25,6 +26,7 @@ function App() {
 
       {!loading && (
         <div className="app">
+          <BackgroundScene />
           <Navbar />
           <Hero />
           <About />

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-scroll'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiMenuAlt3, HiX } from 'react-icons/hi'
+import { FiGithub } from 'react-icons/fi'
 import './Navbar.css'
 
 const navLinks = [
@@ -33,12 +34,10 @@ export default function Navbar() {
     >
       <div className="navbar__container">
         <Link to="home" smooth duration={500} className="navbar__logo">
-          <span className="navbar__logo-bracket">&lt;</span>
-          <span className="navbar__logo-text">SV</span>
-          <span className="navbar__logo-bracket">/&gt;</span>
+          <span className="navbar__logo-mark">SV</span>
+          <span className="navbar__logo-text">Sahil Vaghela</span>
         </Link>
 
-        {/* Desktop Links */}
         <ul className="navbar__links">
           {navLinks.map((link, index) => (
             <motion.li
@@ -62,7 +61,16 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Mobile Menu Toggle */}
+        <a
+          href="https://github.com/SahilVaghela07"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="navbar__repo-link"
+        >
+          <FiGithub />
+          <span>GitHub</span>
+        </a>
+
         <button
           className="navbar__mobile-toggle"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -95,6 +103,15 @@ export default function Navbar() {
                   {link.title}
                 </Link>
               ))}
+              <a
+                href="https://github.com/SahilVaghela07"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="navbar__mobile-cta"
+              >
+                <FiGithub />
+                <span>GitHub Profile</span>
+              </a>
             </motion.div>
           )}
         </AnimatePresence>

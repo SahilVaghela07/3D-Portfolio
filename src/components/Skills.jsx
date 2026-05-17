@@ -90,11 +90,11 @@ export default function Skills() {
             <Canvas
               camera={{ position: [0, 0, 8], fov: 50 }}
               dpr={[1, 1.5]}
-              style={{ height: '400px' }}
+              style={{ height: '360px' }}
             >
               <Suspense fallback={null}>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} intensity={0.8} />
+                <ambientLight intensity={0.42} />
+                <pointLight position={[10, 10, 10]} intensity={0.7} color="#00d992" />
                 <SkillsSphere />
                 <OrbitControls
                   enableZoom={false}
@@ -131,15 +131,12 @@ export default function Skills() {
                       className="skills__item glass-card"
                       variants={skillVariants}
                       whileHover={{
-                        scale: 1.08,
-                        borderColor: skill.color,
-                        boxShadow: `0 0 20px ${skill.color}20`,
+                        scale: 1.04,
+                        borderColor: '#00d992',
+                        boxShadow: '0 0 0 1px rgba(0, 217, 146, 0.12)',
                       }}
                     >
-                      <span
-                        className="skills__item-icon"
-                        style={{ color: skill.color }}
-                      >
+                      <span className="skills__item-icon">
                         {skill.icon}
                       </span>
                       <span className="skills__item-name">{skill.name}</span>

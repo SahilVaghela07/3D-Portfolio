@@ -1,0 +1,5 @@
+[2m12:34:55 PM[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mTHREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[2m12:34:55 PM[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [2m[console.warn] [22mTHREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[2m12:36:54 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mEmailJS Error: {"status":400,"text":"The Public Key is invalid. To find this ID, visit https://dashboard.emailjs.com/admin/account"}
+[2m12:36:59 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mEmailJS Error: {"status":400,"text":"The Public Key is invalid. To find this ID, visit https://dashboard.emailjs.com/admin/account"}
+[2m12:37:03 PM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [2m[console.error] [22mEmailJS Error: {"status":400,"text":"The Public Key is invalid. To find this ID, visit https://dashboard.emailjs.com/admin/account"}

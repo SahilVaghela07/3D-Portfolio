@@ -1,4 +1,4 @@
-import { FiGithub, FiLinkedin, FiMail, FiHeart } from 'react-icons/fi'
+import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi'
 import './Footer.css'
 
 export default function Footer() {
@@ -10,12 +10,11 @@ export default function Footer() {
         <div className="footer__content">
           <div className="footer__brand">
             <span className="footer__logo">
-              <span style={{ color: '#00f5ff' }}>&lt;</span>
-              <span className="gradient-text">Sahil Vaghela</span>
-              <span style={{ color: '#00f5ff' }}>/&gt;</span>
+              <span className="footer__logo-mark">SV</span>
+              <span>Sahil Vaghela</span>
             </span>
             <p className="footer__tagline">
-              Building the future, one line of code at a time.
+              Engineering student, developer, and lifelong learner.
             </p>
           </div>
 
@@ -50,8 +49,7 @@ export default function Footer() {
 
         <div className="footer__bottom">
           <p>
-            © {year} Sahil Vaghela. Made with{' '}
-            <FiHeart className="footer__heart" /> and React + Three.js
+            © {year} Sahil Vaghela. Built with React and Three.js.
           </p>
         </div>
       </div>

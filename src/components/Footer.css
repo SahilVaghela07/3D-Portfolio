@@ -1,84 +1,88 @@
 .footer {
-  padding: 40px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   z-index: 1;
+  padding: 40px 0;
+  background: rgba(16, 16, 16, 0.86);
+  border-top: 1px solid var(--border-primary);
 }
 
 .footer__content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 24px;
   margin-bottom: 24px;
 }
 
 .footer__brand {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 .footer__logo {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-strong);
   font-weight: 700;
 }
 
+.footer__logo-mark {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  color: #101010;
+  background: var(--accent-primary);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
 .footer__tagline {
-  font-size: 0.85rem;
-  color: #6b6b8a;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 .footer__socials {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 
 .footer__social-icon {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #a0a0c0;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: var(--text-secondary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  font-size: 1.05rem;
 }
 
 .footer__social-icon:hover {
-  color: #00f5ff;
-  background: rgba(0, 245, 255, 0.1);
-  border-color: rgba(0, 245, 255, 0.2);
+  color: var(--accent-primary);
+  border-color: var(--border-accent);
   transform: translateY(-2px);
 }
 
 .footer__bottom {
-  text-align: center;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-top: 1px dashed rgba(79, 93, 117, 0.34);
+  text-align: center;
 }
 
 .footer__bottom p {
-  font-size: 0.85rem;
-  color: #4a4a6a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
+  color: var(--text-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
 }
 
-.footer__heart {
-  color: #ec4899;
-  animation: pulse-glow 1.5s ease-in-out infinite;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 700px) {
   .footer__content {
     flex-direction: column;
-    gap: 16px;
-    text-align: center;
+    align-items: flex-start;
   }
 }

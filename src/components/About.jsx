@@ -5,23 +5,23 @@ import './About.css'
 const highlights = [
   {
     icon: <FiCode />,
-    title: 'Developer',
-    description: 'Passionate about building web applications and exploring new technologies.',
+    title: 'Frontend Craft',
+    description: 'Building responsive interfaces with React, motion, and practical component structure.',
   },
   {
     icon: <FiBookOpen />,
-    title: 'Learner',
-    description: 'Currently pursuing engineering at GCET, always eager to expand knowledge.',
+    title: 'Engineering Mindset',
+    description: 'Studying at GCET while turning classroom concepts into working software.',
   },
   {
     icon: <FiCpu />,
-    title: 'Problem Solver',
-    description: 'Love tackling complex challenges and finding elegant solutions through code.',
+    title: 'Problem Solving',
+    description: 'Breaking down product ideas into simple flows, data models, and user actions.',
   },
   {
     icon: <FiHeart />,
-    title: 'Mentor',
-    description: 'Excited to teach and share knowledge with fellow developers and students.',
+    title: 'Community',
+    description: 'Sharing what I learn with peers and staying curious through collaboration.',
   },
 ]
 
@@ -69,21 +69,19 @@ export default function About() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="about__intro">
-              Hey there! I'm <span className="about__highlight">Sahil Vaghela</span>, 
-              an engineering student at <span className="about__highlight">G.H. Patel 
+              I am <span className="about__highlight">Sahil Vaghela</span>, 
+              an engineering student at <span className="about__highlight">G.H. Patel
               College of Engineering & Technology (GCET)</span>.
             </p>
             <p>
-              I'm deeply passionate about technology and software development. 
-              I believe in the power of code to transform ideas into reality, 
-              and I'm always excited to learn new tools, frameworks, and concepts 
-              that push the boundaries of what's possible.
+              I like building web experiences that feel direct, fast, and useful.
+              My current focus is React, backend fundamentals, databases, and the
+              small product decisions that make software easier to understand.
             </p>
             <p>
-              Beyond coding, I love sharing what I learn with others. Whether it's 
-              mentoring peers or collaborating on projects, I find joy in growing 
-              together with the developer community. I'm always ready to build 
-              and create something new!
+              I am always learning by making things, from travel-planning tools to
+              interactive portfolio experiments. The goal is simple: keep improving,
+              keep shipping, and keep helping other students along the way.
             </p>
           </motion.div>
 

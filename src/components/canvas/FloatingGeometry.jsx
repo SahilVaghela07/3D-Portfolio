@@ -26,9 +26,9 @@ function GlowingSphere({ position, color, speed, distort }) {
           roughness={0.2}
           metalness={0.8}
           emissive={color}
-          emissiveIntensity={0.15}
+          emissiveIntensity={0.08}
           transparent
-          opacity={0.7}
+          opacity={0.32}
           wireframe
         />
       </mesh>
@@ -54,9 +54,9 @@ function FloatingTorus({ position, color, speed }) {
         <meshStandardMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={0.2}
+          emissiveIntensity={0.08}
           transparent
-          opacity={0.6}
+          opacity={0.3}
           wireframe
           metalness={0.9}
           roughness={0.1}
@@ -84,9 +84,9 @@ function FloatingOctahedron({ position, color, speed }) {
         <meshStandardMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={0.15}
+          emissiveIntensity={0.08}
           transparent
-          opacity={0.5}
+          opacity={0.28}
           wireframe
           metalness={0.8}
           roughness={0.2}
@@ -99,13 +99,13 @@ function FloatingOctahedron({ position, color, speed }) {
 export default function FloatingGeometry() {
   return (
     <group>
-      <GlowingSphere position={[-4, 2, -5]} color="#00f5ff" speed={0.3} distort={0.4} />
-      <GlowingSphere position={[5, -1, -8]} color="#8b5cf6" speed={0.2} distort={0.3} />
-      <FloatingTorus position={[3, 3, -6]} color="#ec4899" speed={0.4} />
-      <FloatingTorus position={[-5, -2, -10]} color="#3b82f6" speed={0.3} />
-      <FloatingOctahedron position={[0, -3, -7]} color="#00f5ff" speed={0.35} />
-      <FloatingOctahedron position={[-3, 4, -12]} color="#8b5cf6" speed={0.25} />
-      <FloatingOctahedron position={[6, 1, -15]} color="#ec4899" speed={0.2} />
+      <GlowingSphere position={[-4, 2, -5]} color="#00d992" speed={0.24} distort={0.35} />
+      <GlowingSphere position={[5, -1, -8]} color="#2fd6a1" speed={0.18} distort={0.25} />
+      <FloatingTorus position={[3, 3, -6]} color="#10b981" speed={0.28} />
+      <FloatingTorus position={[-5, -2, -10]} color="#8b949e" speed={0.22} />
+      <FloatingOctahedron position={[0, -3, -7]} color="#00d992" speed={0.26} />
+      <FloatingOctahedron position={[-3, 4, -12]} color="#2fd6a1" speed={0.2} />
+      <FloatingOctahedron position={[6, 1, -15]} color="#8b949e" speed={0.16} />
     </group>
   )
 }
