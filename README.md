@@ -68,6 +68,19 @@ npm install
 npm run dev
 ```
 
+## Contact Form Delivery
+
+The contact form posts to `/api/contact`. To send messages to `sahilsvaghela007@gmail.com`, run the included Node server with SMTP credentials:
+
+```bash
+cp .env.example .env
+# Fill SMTP_PASS with a Gmail app password, then:
+npm run build
+npm start
+```
+
+For Gmail, keep `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=465`, and set `SMTP_USER`/`CONTACT_FROM_EMAIL` to the Gmail account that owns the app password.
+
 ## 📬 Contact
 
 - **Email**: sahilsvaghela007@gmail.com
