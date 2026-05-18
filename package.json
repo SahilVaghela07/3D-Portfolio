@@ -5,13 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build --emptyOutDir false",
     "preview": "vite preview",
     "server": "node server.js",
     "start": "node server.js"
   },
   "devDependencies": {
-    "typescript": "~6.0.2",
     "vite": "^8.0.12"
   },
   "dependencies": {

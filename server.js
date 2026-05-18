@@ -372,7 +372,4 @@ const server = createServer((request, response) => {
   serveStatic(request, response)
 })
 
-server.listen(port, () => {
-  console.log(`Portfolio server running at http://localhost:${port}`)
-  console.log(`Contact submissions will be sent to ${contactToEmail}`)
-})
+server.listen(port)

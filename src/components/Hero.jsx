@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-scroll'
-import { FiArrowDown, FiArrowUpRight, FiGithub, FiMail, FiMapPin, FiDownload } from 'react-icons/fi'
+import { FiArrowDown, FiArrowUpRight, FiGithub, FiMail, FiMapPin } from 'react-icons/fi'
 import TiltCard from './TiltCard'
 import './Hero.css'
 
@@ -62,7 +62,7 @@ function FloatingBadge({ icon, label, className = '' }) {
 }
 
 export default function Hero() {
-  const roles = ['Full-Stack Developer', 'UI Engineer', '3D Web Creator']
+  const roles = ['Full-Stack Developer', 'Frontend Engineer', 'UI Engineer', '3D Web Creator']
 
   return (
     <section id="home" className="hero">

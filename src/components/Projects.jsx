@@ -8,7 +8,7 @@ const projects = [
   {
     title: 'Traveloop',
     eyebrow: 'Featured Build',
-    status: 'Live',
+    status: 'LIVE',
     problem: 'College friends struggled to plan multi-city trips — no tool combined itineraries, budgets, and sharing in one place.',
     approach: 'Built a full-stack web app with city discovery, activity search, budget tracking, and public itinerary sharing.',
     tools: ['React', 'Node.js', 'MySQL', 'Tailwind CSS', 'Express'],
@@ -23,7 +23,7 @@ const projects = [
   {
     title: '3D Portfolio',
     eyebrow: 'Experiment',
-    status: 'Live',
+    status: 'LIVE',
     problem: 'Traditional portfolios feel flat and forgettable — I wanted mine to demonstrate technical skill at first glance.',
     approach: 'Created an immersive 3D experience using Three.js with reactive particles, floating geometry, and tilt cards.',
     tools: ['React', 'Three.js', 'Framer Motion', 'Vite'],
@@ -38,7 +38,7 @@ const projects = [
   {
     title: 'Coming Soon',
     eyebrow: 'In Progress',
-    status: 'Planning',
+    status: 'PLANNING',
     problem: 'New problems to solve — currently exploring ideas in AI-powered tools and real-time collaborative systems.',
     approach: 'Researching, prototyping, and validating ideas before committing to a full build.',
     tools: ['Next.js', 'TypeScript', 'MongoDB', 'API'],

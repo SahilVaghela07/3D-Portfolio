@@ -1,92 +1,29 @@
-# 🚀 3D Portfolio Website
+# Sahil Vaghela — Developer Portfolio
 
-An interactive, immersive 3D portfolio website built with modern web technologies featuring stunning visual effects and smooth animations.
+A 3D interactive developer portfolio built with React, Three.js, and Framer Motion.
+Designed to demonstrate full-stack thinking, frontend craft, and problem-solving ability.
 
-![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react)
-![Three.js](https://img.shields.io/badge/Three.js-3D-000000?style=flat-square&logo=three.js)
-![Vite](https://img.shields.io/badge/Vite-Build-646CFF?style=flat-square&logo=vite)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-Animations-0055FF?style=flat-square)
+## 🔗 Live Site
+[View Portfolio](#) <!-- Replace # with your live URL -->
 
-## ✨ Features
+## 🛠 Tech Stack
+- **Frontend:** React, Three.js, Framer Motion, Vite, Tailwind CSS
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB, SQL
+- **Tools:** Git, GitHub, VS Code, Vite, Vercel
 
-- **3D Particle Field** — 1500+ animated particles floating in 3D space
-- **Floating Geometry** — Wireframe icosahedrons, torus shapes, and octahedrons with glow
-- **Post-processing** — Bloom and vignette effects for a cinematic look
-- **Glassmorphism UI** — Modern frosted glass card design
-- **Smooth Animations** — Scroll-triggered reveals with Framer Motion
-- **Interactive 3D Skills Sphere** — Skills arranged in a 3D spherical layout
-- **Responsive Design** — Works on all devices and screen sizes
-- **Dark Space Theme** — Premium dark UI with gradient accents
+## 📁 Projects Featured
+- **Traveloop** — Multi-city trip planner for college friends (React, Node.js, MySQL, Express, Tailwind)
+- **3D Portfolio** — This portfolio itself (React, Three.js, Framer Motion, Vite)
+- **Coming Soon** — AI-powered tools and real-time collaborative systems (Next.js, TypeScript, MongoDB)
 
-## 🛠️ Tech Stack
-
-| Technology | Purpose |
-|---|---|
-| React 18 | UI Framework |
-| Three.js / R3F | 3D Graphics |
-| @react-three/drei | 3D Helpers |
-| @react-three/postprocessing | Visual Effects |
-| Framer Motion | Animations |
-| Vite | Build Tool |
-
-## 📂 Project Structure
-
-```
-src/
-├── components/
-│   ├── canvas/
-│   │   ├── ParticleField.jsx
-│   │   ├── FloatingGeometry.jsx
-│   │   ├── HeroScene.jsx
-│   │   └── SkillsSphere.jsx
-│   ├── Navbar.jsx
-│   ├── Hero.jsx
-│   ├── About.jsx
-│   ├── Projects.jsx
-│   ├── Skills.jsx
-│   ├── Contact.jsx
-│   ├── Footer.jsx
-│   └── Loader.jsx
-├── App.jsx
-├── main.jsx
-└── index.css
-```
-
-## 🚀 Getting Started
-
+## 🚀 Run Locally
 ```bash
-# Clone the repository
-git clone https://github.com/SahilVaghela07/3D-Portfolio.git
-
-# Navigate to the project
+git clone https://github.com/SahilVaghela07/3D-Portfolio
 cd 3D-Portfolio
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
 ```
 
-## Contact Form Delivery
-
-The contact form posts to `/api/contact`. To send messages to `sahilsvaghela007@gmail.com`, run the included Node server with SMTP credentials:
-
-```bash
-cp .env.example .env
-# Fill SMTP_PASS with a Gmail app password, then:
-npm run build
-npm start
-```
-
-For Gmail, keep `SMTP_HOST=smtp.gmail.com`, `SMTP_PORT=465`, and set `SMTP_USER`/`CONTACT_FROM_EMAIL` to the Gmail account that owns the app password.
-
 ## 📬 Contact
-
-- **Email**: sahilsvaghela007@gmail.com
-- **LinkedIn**: [Sahil Vaghela](https://www.linkedin.com/in/sahil-vaghela-022750307)
-- **GitHub**: [SahilVaghela07](https://github.com/SahilVaghela07)
-
----
-
-Made with ❤️ by **Sahil Vaghela**
+Open to opportunities — Gujarat, India · Remote Ready
