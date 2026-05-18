@@ -16,16 +16,6 @@ function hasEmailJsConfig() {
   return Boolean(EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY)
 }
 
-function buildEmailPayload(form) {
-  return {
-    from_name: form.from_name,
-    from_email: form.from_email,
-    reply_to: form.from_email,
-    to_name: 'Sahil Vaghela',
-    message: form.message,
-  }
-}
-
 function buildMailtoUrl(form) {
   const subject = `Portfolio message from ${form.from_name}`
   const body = [
@@ -39,12 +29,12 @@ function buildMailtoUrl(form) {
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 }
 
-async function sendWithEmailJs(form) {
-  await emailjs.send(
+async function sendWithEmailJs(formElement) {
+  await emailjs.sendForm(
     EMAILJS_SERVICE_ID,
     EMAILJS_TEMPLATE_ID,
-    buildEmailPayload(form),
-    { publicKey: EMAILJS_PUBLIC_KEY }
+    formElement,
+    EMAILJS_PUBLIC_KEY
   )
 }
 
@@ -101,15 +91,18 @@ export default function Contact() {
     resetStatus()
   }
 
-  const handleSubmit = async (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault()
+
+    const formElement = e.currentTarget
 
     setStatus('sending')
     setFeedback('')
 
     if (hasEmailJsConfig()) {
       try {
-        await sendWithEmailJs(form)
+        await sendWithEmailJs(formElement)
+        formElement.reset()
         markSent()
         return
       } catch {
@@ -244,12 +237,15 @@ export default function Contact() {
               <form
                 id="contact-form"
                 className="contact__form glass-card"
-                onSubmit={handleSubmit}
+                onSubmit={sendEmail}
               >
                 <div className="contact__form-header">
                   <span className="contact__form-label">Send a Message</span>
                   <span className="contact__form-dot" />
                 </div>
+
+                <input type="hidden" name="to_email" value={CONTACT_EMAIL} readOnly />
+                <input type="hidden" name="reply_to" value={form.from_email} readOnly />
 
                 <div className="contact__form-group">
                   <label htmlFor="contact-name">Your Name</label>

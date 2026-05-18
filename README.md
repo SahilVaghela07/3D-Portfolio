@@ -31,7 +31,8 @@ Add these EmailJS environment variables in Vercel Project Settings before deploy
 - `VITE_EMAILJS_TEMPLATE_ID`
 - `VITE_EMAILJS_PUBLIC_KEY`
 
-The EmailJS template should accept `from_name`, `from_email`, and `message`.
+The contact form uses `emailjs.sendForm`. The EmailJS template should accept `from_name`, `from_email`, and `message`.
+You can also use `reply_to` for replies and `to_email` if the template recipient is variable.
 If EmailJS is not configured, the form falls back to FormSubmit and then a prefilled email draft.
 FormSubmit may send a one-time confirmation email to `sahilsvaghela007@gmail.com`.
 
