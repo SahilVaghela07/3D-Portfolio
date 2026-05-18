@@ -9,56 +9,10 @@ const CONTACT_EMAIL = 'sahilsvaghela007@gmail.com'
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`
 const STATUS_RESET_DELAY = 5000
 
 function hasEmailJsConfig() {
   return Boolean(EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY)
-}
-
-function buildMailtoUrl(form) {
-  const subject = `Portfolio message from ${form.from_name}`
-  const body = [
-    `Name: ${form.from_name}`,
-    `Email: ${form.from_email}`,
-    '',
-    'Message:',
-    form.message,
-  ].join('\n')
-
-  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-}
-
-async function sendWithEmailJs(formElement) {
-  await emailjs.sendForm(
-    EMAILJS_SERVICE_ID,
-    EMAILJS_TEMPLATE_ID,
-    formElement,
-    EMAILJS_PUBLIC_KEY
-  )
-}
-
-async function sendWithFormSubmit(form) {
-  const subject = `Portfolio message from ${form.from_name}`
-  const response = await fetch(FORMSUBMIT_ENDPOINT, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name: form.from_name,
-      email: form.from_email,
-      message: form.message,
-      _subject: subject,
-      _template: 'table',
-      _captcha: 'false',
-    }),
-  })
-
-  if (!response.ok) {
-    throw new Error('FormSubmit request failed.')
-  }
 }
 
 export default function Contact() {
@@ -84,38 +38,36 @@ export default function Contact() {
     resetStatus()
   }
 
-  const openEmailDraft = () => {
-    window.location.href = buildMailtoUrl(form)
-    setStatus('fallback')
-    setFeedback('Your email app opened with this message filled in. Press send there to finish.')
-    resetStatus()
-  }
-
-  const sendEmail = async (e) => {
+  const sendEmail = (e) => {
     e.preventDefault()
 
     const formElement = e.currentTarget
 
+    if (!hasEmailJsConfig()) {
+      alert('EmailJS is not configured yet. Please add the service ID, template ID, and public key.')
+      return
+    }
+
     setStatus('sending')
     setFeedback('')
 
-    if (hasEmailJsConfig()) {
-      try {
-        await sendWithEmailJs(formElement)
+    emailjs.sendForm(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      formElement,
+      EMAILJS_PUBLIC_KEY
+    )
+      .then(() => {
+        alert('Message sent successfully!')
         formElement.reset()
         markSent()
-        return
-      } catch {
+      })
+      .catch((error) => {
+        alert('Failed to send message. Please try again.')
+        console.error(error)
+        setStatus('idle')
         setFeedback('')
-      }
-    }
-
-    try {
-      await sendWithFormSubmit(form)
-      markSent()
-    } catch {
-      openEmailDraft()
-    }
+      })
   }
 
   return (
@@ -288,7 +240,7 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className={`btn-primary contact__submit ${status === 'sent' ? 'contact__submit--sent' : ''} ${status === 'fallback' ? 'contact__submit--fallback' : ''}`}
+                  className={`btn-primary contact__submit ${status === 'sent' ? 'contact__submit--sent' : ''}`}
                   id="submit-btn"
                   disabled={status === 'sending' || status === 'sent'}
                 >
@@ -299,8 +251,6 @@ export default function Contact() {
                     </span>
                   ) : status === 'sent' ? (
                     <span><FiCheck /> Message Sent</span>
-                  ) : status === 'fallback' ? (
-                    <span><FiMail /> Email Draft Opened</span>
                   ) : (
                     <>
                       <FiSend />
