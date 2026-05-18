@@ -1,40 +1,32 @@
 # Sahil Vaghela — Developer Portfolio
 
 A 3D interactive developer portfolio built with React, Three.js, and Framer Motion.
-Designed to demonstrate full-stack thinking, frontend craft, and problem-solving ability.
+Designed to demonstrate full-stack thinking, frontend craft, and real problem-solving ability.
 
-## 🔗 Live Site
-[View Portfolio](https://sahil-vaghela.vercel.app)
+## Live Site
+https://sahil-vaghela.vercel.app
 
-## 🛠 Tech Stack
-- **Frontend:** React, Three.js, Framer Motion, Vite, Tailwind CSS
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB, SQL
-- **Tools:** Git, GitHub, VS Code, Vite, Vercel
+## Tech Stack
+Frontend: React, Three.js, Framer Motion, Vite, Tailwind CSS
+Backend: Node.js, Express.js, REST API
+Database: MongoDB, SQL
+Tools: Git, GitHub, VS Code, Vercel, EmailJS
 
-## 📁 Projects Featured
-- **Traveloop** — Multi-city trip planner for college friends (React, Node.js, MySQL, Express, Tailwind)
-- **3D Portfolio** — This portfolio itself (React, Three.js, Framer Motion, Vite)
-- **Coming Soon** — AI-powered tools and real-time collaborative systems (Next.js, TypeScript, MongoDB)
+## Projects
+- Traveloop (Live) — React, Node.js, MySQL, Express, Tailwind
+- 3D Portfolio (Live) — React, Three.js, Framer Motion, Vite
+- Coming Soon (Planning) — Next.js, TypeScript, MongoDB, API
 
-## 🚀 Run Locally
-```bash
+## Contact Form
+Integrated with EmailJS — messages sent to sahilsvaghela007@gmail.com
+
+## Run Locally
 git clone https://github.com/SahilVaghela07/3D-Portfolio
 cd 3D-Portfolio
 npm install
 npm run dev
-```
 
-## ✉️ Contact Form Setup
-Add these EmailJS environment variables in Vercel Project Settings before deploying:
-- `VITE_EMAILJS_SERVICE_ID`
-- `VITE_EMAILJS_TEMPLATE_ID`
-- `VITE_EMAILJS_PUBLIC_KEY`
-
-The contact form uses `emailjs.sendForm`. The EmailJS template should accept `from_name`, `from_email`, and `message`.
-You can also use `reply_to` for replies and `to_email` if the template recipient is variable.
-If EmailJS is not configured, the form falls back to FormSubmit and then a prefilled email draft.
-FormSubmit may send a one-time confirmation email to `sahilsvaghela007@gmail.com`.
-
-## 📬 Contact
-Open to opportunities — Gujarat, India · Remote Ready
+## Contact
+Email: sahilsvaghela007@gmail.com
+Location: Gujarat, India - Remote Ready
+GitHub: SahilVaghela07
