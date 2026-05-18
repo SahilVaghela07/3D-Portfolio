@@ -5,9 +5,10 @@ import * as THREE from 'three'
 
 const skills = [
   'JavaScript', 'React', 'HTML', 'CSS', 'Node.js',
-  'Python', 'Git', 'C++', 'Java', 'MongoDB',
+  'Express.js', 'Git', 'C++', 'Java', 'MongoDB',
   'SQL', 'TypeScript', 'Next.js', 'Three.js', 'Vite',
-  'Figma', 'VS Code', 'GitHub', 'Linux', 'Docker',
+  'Figma', 'VS Code', 'GitHub', 'Linux', 'REST API',
+  'Responsive Design',
 ]
 
 function SkillNode({ text, position, color }) {

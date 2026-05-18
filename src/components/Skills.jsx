@@ -4,11 +4,14 @@ import { OrbitControls, Preload } from '@react-three/drei'
 import { motion } from 'framer-motion'
 import {
   SiJavascript, SiReact, SiHtml5, SiCss, SiNodedotjs,
-  SiPython, SiGit, SiCplusplus, SiMongodb, SiTypescript,
+  SiGit, SiCplusplus, SiMongodb, SiTypescript,
   SiNextdotjs, SiThreedotjs, SiFigma, SiGithub, SiLinux,
-  SiDocker, SiTailwindcss, SiVite
+  SiTailwindcss, SiVite, SiExpress
 } from 'react-icons/si'
 import { FaJava, FaDatabase } from 'react-icons/fa'
+import { MdApi } from 'react-icons/md'
+import { TbDevicesCode } from 'react-icons/tb'
+import { VscVscode } from 'react-icons/vsc'
 import SkillsSphere from './canvas/SkillsSphere'
 import TiltCard from './TiltCard'
 import './Skills.css'
@@ -25,20 +28,22 @@ const skillCategories = [
       { name: 'Three.js', icon: <SiThreedotjs />, color: '#ffffff', level: 'Beginner-Mid', proof: '3D portfolio implementation' },
       { name: 'Tailwind', icon: <SiTailwindcss />, color: '#06b6d4', level: 'Intermediate', proof: 'Used in Traveloop' },
       { name: 'Next.js', icon: <SiNextdotjs />, color: '#ffffff', level: 'Beginner', proof: 'Currently exploring' },
+      { name: 'Responsive Design', icon: <TbDevicesCode />, color: '#6366f1', level: 'Advanced', proof: 'Mobile-first layouts across projects' },
     ],
   },
   {
     title: 'Backend & Tools',
     skills: [
       { name: 'Node.js', icon: <SiNodedotjs />, color: '#339933', level: 'Intermediate', proof: 'Traveloop API backend' },
-      { name: 'Python', icon: <SiPython />, color: '#3776ab', level: 'Intermediate', proof: 'Scripts and data projects' },
+      { name: 'Express.js', icon: <SiExpress />, color: '#ffffff', level: 'Intermediate', proof: 'REST backend routing' },
+      { name: 'REST API', icon: <MdApi />, color: '#00d992', level: 'Intermediate', proof: 'Client-server data flows' },
       { name: 'C++', icon: <SiCplusplus />, color: '#00599c', level: 'Intermediate', proof: 'DSA problem solving' },
-      { name: 'Java', icon: <FaJava />, color: '#ed8b00', level: 'Beginner-Mid', proof: 'Academic coursework' },
+      { name: 'Java', icon: <FaJava />, color: '#ed8b00', level: 'Beginner', proof: 'Academic coursework' },
       { name: 'MongoDB', icon: <SiMongodb />, color: '#47a248', level: 'Beginner', proof: 'Learning with projects' },
       { name: 'SQL', icon: <FaDatabase />, color: '#4479a1', level: 'Intermediate', proof: 'Traveloop MySQL database' },
       { name: 'Git', icon: <SiGit />, color: '#f05032', level: 'Intermediate', proof: 'Daily workflow tool' },
       { name: 'GitHub', icon: <SiGithub />, color: '#ffffff', level: 'Advanced', proof: 'All projects hosted' },
-      { name: 'Docker', icon: <SiDocker />, color: '#2496ed', level: 'Beginner', proof: 'Exploring containerization' },
+      { name: 'VS Code', icon: <VscVscode />, color: '#007acc', level: 'Advanced', proof: 'Primary development environment' },
       { name: 'Linux', icon: <SiLinux />, color: '#fcc624', level: 'Beginner-Mid', proof: 'Dev environment' },
       { name: 'Vite', icon: <SiVite />, color: '#646cff', level: 'Intermediate', proof: 'Build tool for all projects' },
       { name: 'Figma', icon: <SiFigma />, color: '#f24e1e', level: 'Beginner', proof: 'UI mockups' },
