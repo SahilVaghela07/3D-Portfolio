@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FiCode, FiBookOpen, FiCpu, FiHeart, FiTarget, FiTrendingUp } from 'react-icons/fi'
+import { FiCode, FiCpu, FiHeart, FiTarget } from 'react-icons/fi'
 import TiltCard from './TiltCard'
 import './About.css'
 
@@ -23,9 +23,9 @@ const highlights = [
     color: '#f59e0b',
   },
   {
-    icon: <FiTrendingUp />,
-    title: 'Always Growing',
-    description: 'Shipping projects, learning from feedback, and pushing beyond my comfort zone every week.',
+    icon: <FiHeart />,
+    title: 'Student Support',
+    description: 'Helping classmates debug, understand core concepts, and ship cleaner college projects.',
     color: '#00d992',
   },
 ]
@@ -80,10 +80,9 @@ export default function About() {
                 <div className="about__story-section">
                   <span className="about__story-label">What I Do</span>
                   <p className="about__intro">
-                    I'm <span className="about__highlight">Sahil Vaghela</span>, a
-                    developer and engineering student at{' '}
-                    <span className="about__highlight">GCET</span> who builds web
-                    experiences that feel fast, clean, and genuinely useful.
+                    A developer and engineering student at{' '}
+                    <span className="about__highlight">GCET</span> — building fast,
+                    clean, and genuinely useful web applications.
                   </p>
                 </div>
 
@@ -91,10 +90,9 @@ export default function About() {
                 <div className="about__story-section">
                   <span className="about__story-label">Why I Build</span>
                   <p>
-                    I realized early that the best way to learn isn't reading docs — it's
-                    shipping real things. Every broken build and stubborn bug taught me
-                    more than any textbook. That hunger to solve problems drives everything
-                    I create.
+                    The best way to learn is by shipping real things. Every broken build
+                    and stubborn bug taught me more than any textbook — that hunger to
+                    solve problems drives everything I create.
                   </p>
                 </div>
 
@@ -102,9 +100,9 @@ export default function About() {
                 <div className="about__story-section">
                   <span className="about__story-label">Where I'm Headed</span>
                   <p>
-                    I'm working toward becoming a full-stack engineer who can own a product
-                    end-to-end — from database design to pixel-perfect UI. Always learning,
-                    always shipping, always helping other students along the way.
+                    Building production-ready full-stack products end-to-end — from
+                    database design to polished UI. Always shipping, always learning,
+                    always helping other students grow alongside me.
                   </p>
                 </div>
               </div>

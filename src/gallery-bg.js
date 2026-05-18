@@ -56,17 +56,6 @@ const roomThemes = [
     fogFar: 22,
   },
   {
-    id: 'learning',
-    name: 'Echo',
-    accent: '#8855FF',
-    accentAlt: '#FF9CEB',
-    wall: '#0E091C',
-    floor: '#141027',
-    fog: '#0A0614',
-    fogNear: 5.8,
-    fogFar: 24,
-  },
-  {
     id: 'contact',
     name: 'Signal',
     accent: '#FFDD88',

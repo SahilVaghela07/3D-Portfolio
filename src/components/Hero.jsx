@@ -62,7 +62,7 @@ function FloatingBadge({ icon, label, className = '' }) {
 }
 
 export default function Hero() {
-  const roles = ['Full-Stack Developer', 'React Specialist', 'UI Engineer', '3D Web Creator']
+  const roles = ['Full-Stack Developer', 'UI Engineer', '3D Web Creator']
 
   return (
     <section id="home" className="hero">
@@ -174,9 +174,9 @@ export default function Hero() {
               <pre className="hero__code" aria-label="Developer profile code sample">
                 <code>{`const sahil = {
   role: "Full-Stack Developer",
-  focus: ["React", "Node.js", "Three.js", "TypeScript"],
+  focus: ["React", "Node.js", "Three.js"],
   location: "Gujarat, India 🇮🇳",
-  education: "B.E. @ GCET",
+  education: "B.Tech @ GCET",
   passion: "Building things that matter",
   status: "Always learning, always shipping"
 }`}</code>
@@ -184,7 +184,7 @@ export default function Hero() {
               <div className="hero__metrics">
                 <div className="hero__metric">
                   <strong>01</strong>
-                  <span>Featured Project</span>
+                  <span>Projects Live</span>
                 </div>
                 <div className="hero__metric">
                   <strong>20+</strong>

@@ -10,7 +10,6 @@ const navLinks = [
   { id: 'about', title: 'About' },
   { id: 'projects', title: 'Projects' },
   { id: 'skills', title: 'Skills' },
-  { id: 'learning', title: 'Learning' },
   { id: 'contact', title: 'Contact' },
 ]
 
