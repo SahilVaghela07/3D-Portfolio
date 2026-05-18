@@ -1,54 +1,127 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
-import { FiMail, FiMapPin, FiSend, FiGithub, FiLinkedin, FiArrowUpRight, FiClock, FiCheck, FiX } from 'react-icons/fi'
+import { FiMail, FiMapPin, FiSend, FiGithub, FiLinkedin, FiArrowUpRight, FiClock, FiCheck } from 'react-icons/fi'
 import TiltCard from './TiltCard'
 import './Contact.css'
 
+const CONTACT_EMAIL = 'sahilsvaghela007@gmail.com'
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`
+const STATUS_RESET_DELAY = 5000
 
 function hasEmailJsConfig() {
   return Boolean(EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY)
 }
 
+function buildEmailPayload(form) {
+  return {
+    from_name: form.from_name,
+    from_email: form.from_email,
+    reply_to: form.from_email,
+    to_name: 'Sahil Vaghela',
+    message: form.message,
+  }
+}
+
+function buildMailtoUrl(form) {
+  const subject = `Portfolio message from ${form.from_name}`
+  const body = [
+    `Name: ${form.from_name}`,
+    `Email: ${form.from_email}`,
+    '',
+    'Message:',
+    form.message,
+  ].join('\n')
+
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+}
+
+async function sendWithEmailJs(form) {
+  await emailjs.send(
+    EMAILJS_SERVICE_ID,
+    EMAILJS_TEMPLATE_ID,
+    buildEmailPayload(form),
+    { publicKey: EMAILJS_PUBLIC_KEY }
+  )
+}
+
+async function sendWithFormSubmit(form) {
+  const subject = `Portfolio message from ${form.from_name}`
+  const response = await fetch(FORMSUBMIT_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: form.from_name,
+      email: form.from_email,
+      message: form.message,
+      _subject: subject,
+      _template: 'table',
+      _captcha: 'false',
+    }),
+  })
+
+  if (!response.ok) {
+    throw new Error('FormSubmit request failed.')
+  }
+}
+
 export default function Contact() {
   const [form, setForm] = useState({ from_name: '', from_email: '', message: '' })
   const [status, setStatus] = useState('idle')
-  const formRef = useRef()
+  const [feedback, setFeedback] = useState('')
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  const resetStatus = () => {
+    setTimeout(() => {
+      setStatus('idle')
+      setFeedback('')
+    }, STATUS_RESET_DELAY)
+  }
+
+  const markSent = () => {
+    setForm({ from_name: '', from_email: '', message: '' })
+    setStatus('sent')
+    setFeedback('Thanks. Your message is on its way.')
+    resetStatus()
+  }
+
+  const openEmailDraft = () => {
+    window.location.href = buildMailtoUrl(form)
+    setStatus('fallback')
+    setFeedback('Your email app opened with this message filled in. Press send there to finish.')
+    resetStatus()
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!hasEmailJsConfig()) {
-      setStatus('error')
-      return
+    setStatus('sending')
+    setFeedback('')
+
+    if (hasEmailJsConfig()) {
+      try {
+        await sendWithEmailJs(form)
+        markSent()
+        return
+      } catch {
+        setFeedback('')
+      }
     }
 
-    setStatus('sending')
-
     try {
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        { publicKey: EMAILJS_PUBLIC_KEY }
-      )
-
-      setForm({ from_name: '', from_email: '', message: '' })
-      formRef.current.reset()
-      setStatus('sent')
-
-      setTimeout(() => {
-        setStatus('idle')
-      }, 3000)
+      await sendWithFormSubmit(form)
+      markSent()
     } catch {
-      setStatus('error')
+      openEmailDraft()
     }
   }
 
@@ -169,7 +242,6 @@ export default function Contact() {
           >
             <TiltCard className="contact__form-tilt" intensity={5} disabled>
               <form
-                ref={formRef}
                 id="contact-form"
                 className="contact__form glass-card"
                 onSubmit={handleSubmit}
@@ -220,7 +292,7 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className={`btn-primary contact__submit ${status === 'sent' ? 'contact__submit--sent' : ''} ${status === 'error' ? 'contact__submit--error' : ''}`}
+                  className={`btn-primary contact__submit ${status === 'sent' ? 'contact__submit--sent' : ''} ${status === 'fallback' ? 'contact__submit--fallback' : ''}`}
                   id="submit-btn"
                   disabled={status === 'sending' || status === 'sent'}
                 >
@@ -231,8 +303,8 @@ export default function Contact() {
                     </span>
                   ) : status === 'sent' ? (
                     <span><FiCheck /> Message Sent</span>
-                  ) : status === 'error' ? (
-                    <span><FiX /> Failed — Try Again</span>
+                  ) : status === 'fallback' ? (
+                    <span><FiMail /> Email Draft Opened</span>
                   ) : (
                     <>
                       <FiSend />
@@ -240,6 +312,9 @@ export default function Contact() {
                     </>
                   )}
                 </button>
+                {feedback ? (
+                  <p className="contact__feedback">{feedback}</p>
+                ) : null}
               </form>
             </TiltCard>
           </motion.div>
