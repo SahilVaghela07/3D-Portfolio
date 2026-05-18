@@ -8,24 +8,8 @@ import './Contact.css'
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-const CONTACT_API_URL = import.meta.env.VITE_CONTACT_API_URL || '/api/contact'
 
-async function sendWithBackend(form) {
-  const response = await fetch(CONTACT_API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(form),
-  })
-
-  if (!response.ok) {
-    const errorText = await response.text()
-    throw new Error(errorText || 'Contact API request failed.')
-  }
-}
-
-function canUseEmailJs() {
+function hasEmailJsConfig() {
   return Boolean(EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY)
 }
 
@@ -41,23 +25,20 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    if (!hasEmailJsConfig()) {
+      setStatus('error')
+      return
+    }
+
     setStatus('sending')
 
     try {
-      try {
-        await sendWithBackend(form)
-      } catch (backendError) {
-        if (!canUseEmailJs()) {
-          throw backendError
-        }
-
-        await emailjs.sendForm(
-          EMAILJS_SERVICE_ID,
-          EMAILJS_TEMPLATE_ID,
-          formRef.current,
-          { publicKey: EMAILJS_PUBLIC_KEY }
-        )
-      }
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      )
 
       setForm({ from_name: '', from_email: '', message: '' })
       formRef.current.reset()
@@ -66,8 +47,7 @@ export default function Contact() {
       setTimeout(() => {
         setStatus('idle')
       }, 3000)
-    } catch (err) {
-      console.error('EmailJS error:', err)
+    } catch {
       setStatus('error')
     }
   }

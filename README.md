@@ -4,7 +4,7 @@ A 3D interactive developer portfolio built with React, Three.js, and Framer Moti
 Designed to demonstrate full-stack thinking, frontend craft, and problem-solving ability.
 
 ## 🔗 Live Site
-[View Portfolio](#) <!-- Replace # with your live URL -->
+[View Portfolio](https://sahil-vaghela.vercel.app)
 
 ## 🛠 Tech Stack
 - **Frontend:** React, Three.js, Framer Motion, Vite, Tailwind CSS
@@ -24,6 +24,14 @@ cd 3D-Portfolio
 npm install
 npm run dev
 ```
+
+## ✉️ Contact Form Setup
+Add these EmailJS environment variables in Vercel Project Settings before deploying:
+- `VITE_EMAILJS_SERVICE_ID`
+- `VITE_EMAILJS_TEMPLATE_ID`
+- `VITE_EMAILJS_PUBLIC_KEY`
+
+The EmailJS template should accept `from_name`, `from_email`, and `message`.
 
 ## 📬 Contact
 Open to opportunities — Gujarat, India · Remote Ready
